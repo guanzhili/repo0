@@ -5,15 +5,14 @@ import (
 )
 
 func countChars(str string) map[rune]int {
-	countMap := make(map[rune]int)
+countMap := make(map[rune]int)
 	for _, char := range str {
 		countMap[char]++
 	}
 	return countMap
 }
-
 func main() {
-	str := "hello world"
+str := "hello world"
 	result := countChars(str)
 
 	for char, count := range result {
