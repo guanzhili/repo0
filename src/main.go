@@ -4,7 +4,9 @@ import (
 	"fmt"
 	"log"
 	"os"
-)func main() {
+)
+
+func main() {
 	people := []Person{
 		{"Alice", 25},
 		{"Bob", 17},
