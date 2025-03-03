@@ -51,4 +51,4 @@ jobs:
           echo "PR_URL is $PR_URL"
           echo "GITHUB_ENV is $GITHUB_ENV"
           echo "Running command: python -m pr_agent.cli --pr_url \"$PR_URL\" \"$AWS_REVIEW_ARGS\""
-          python -m pr_agent.cli --pr_url "$PR_URL" "$AWS_REVIEW_ARGS"
+          python -m pr_agent.cli --pr_url $PR_URL $AWS_REVIEW_ARGS
