@@ -45,6 +45,7 @@ jobs:
           PR_AGENT_AWS__AWS_REGION_NAME: ${{ secrets.PR_AGENT_AWS__AWS_REGION_NAME }}
           PR_AGENT_AWS__AWS_SECRET_ACCESS_KEY: ${{ secrets.PR_AGENT_AWS__AWS_SECRET_ACCESS_KEY }}
           PR_AGENT_GITHUB__USER_TOKEN: ${{ secrets.PR_AGENT_GITHUB__USER_TOKEN }}
+          PR_AGENT_CONFIG__MODEL: ${{ secrets.PR_AGENT_CONFIG__MODEL }}
         run: |
           cd pr-agent-aws
           echo "PR_URL is $PR_URL"
