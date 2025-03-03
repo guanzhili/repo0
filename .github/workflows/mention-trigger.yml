@@ -19,7 +19,7 @@ jobs:
           COMMENT_BODY="${{ github.event.comment.body }}"
           PR_URL="${{ github.event.issue.pull_request.html_url || github.event.issue.html_url }}"
           PR_URL="${{ github.event.issue.pull_request.html_url || github.event.issue.html_url }}"
-          AWS_REVIEW_ARGS=$(echo "$COMMENT_BODY" | sed -n 's/.*/aws_review //p' | tr -d '\n' | tr -d '\r')
+          AWS_REVIEW_ARGS=$(echo "$COMMENT_BODY" | sed -n 's|^/aws_review[[:space:]]*||p' | tr -d '\n' | tr -d '\r')
 
           echo "PR_URL=$PR_URL" >> $GITHUB_ENV
           echo "AWS_REVIEW_ARGS=$AWS_REVIEW_ARGS" >> $GITHUB_ENV
