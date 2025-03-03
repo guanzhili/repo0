@@ -42,4 +42,7 @@ jobs:
       - name: Run Python script
         run: |
           cd pr-agent-aws
+          echo $PR_URL
+          echo $GITHUB_ENV
+          echo "Running command: python -m pr_agent.cli --pr_url \"$PR_URL\" \"$AWS_REVIEW_ARGS\""
           python -m pr_agent.cli --pr_url "$PR_URL" "$AWS_REVIEW_ARGS"
