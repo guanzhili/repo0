@@ -7,7 +7,7 @@ on:
 jobs:
   aws_review:
     runs-on: ubuntu-latest
-    if: contains(github.event.comment.body, '@aws_review')  # 只有当评论包含 @aws_review 时触发
+    if: ${{ contains(github.event.comment.body, '@aws_review') }} # 只有当评论包含 @aws_review 时触发
 
     steps:
       - name: Checkout the PR repository
@@ -18,10 +18,12 @@ jobs:
         run: |
           COMMENT_BODY="${{ github.event.comment.body }}"
           PR_URL="${{ github.event.issue.pull_request.html_url || github.event.issue.html_url }}"
+          PR_URL="${{ github.event.issue.pull_request.html_url || github.event.issue.html_url }}"
           AWS_REVIEW_ARGS=$(echo "$COMMENT_BODY" | sed -n 's/.*@aws_review //p')
 
           echo "PR_URL=$PR_URL" >> $GITHUB_ENV
           echo "AWS_REVIEW_ARGS=$AWS_REVIEW_ARGS" >> $GITHUB_ENV
+
 
       - name: Clone pr-agent-aws repo
         run: |
