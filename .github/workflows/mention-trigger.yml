@@ -40,9 +40,14 @@ jobs:
           pip install -r requirements.txt
 
       - name: Run Python script
+        env:
+          PR_AGENT_AWS__AWS_ACCESS_KEY_ID: ${{ secrets.PR_AGENT_AWS__AWS_ACCESS_KEY_ID }}
+          PR_AGENT_AWS__AWS_REGION_NAME: ${{ secrets.PR_AGENT_AWS__AWS_REGION_NAME }}
+          PR_AGENT_AWS__AWS_SECRET_ACCESS_KEY: ${{ secrets.PR_AGENT_AWS__AWS_SECRET_ACCESS_KEY }}
+          PR_AGENT_GITHUB__USER_TOKEN: ${{ secrets.PR_AGENT_GITHUB__USER_TOKEN }}
         run: |
           cd pr-agent-aws
-          echo $PR_URL
-          echo $GITHUB_ENV
+          echo "PR_URL is $PR_URL"
+          echo "GITHUB_ENV is $GITHUB_ENV"
           echo "Running command: python -m pr_agent.cli --pr_url \"$PR_URL\" \"$AWS_REVIEW_ARGS\""
           python -m pr_agent.cli --pr_url "$PR_URL" "$AWS_REVIEW_ARGS"
