@@ -1,0 +1,43 @@
+name: AWS Review Trigger
+
+on:
+  issue_comment:
+    types: [created]
+
+jobs:
+  aws_review:
+    runs-on: ubuntu-latest
+    if: contains(github.event.comment.body, '@aws_review')  # 只有当评论包含 @aws_review 时触发
+
+    steps:
+      - name: Checkout the PR repository
+        uses: actions/checkout@v4
+
+      - name: Extract PR URL and @aws_review arguments
+        id: extract
+        run: |
+          COMMENT_BODY="${{ github.event.comment.body }}"
+          PR_URL="${{ github.event.issue.pull_request.html_url || github.event.issue.html_url }}"
+          AWS_REVIEW_ARGS=$(echo "$COMMENT_BODY" | sed -n 's/.*@aws_review //p')
+
+          echo "PR_URL=$PR_URL" >> $GITHUB_ENV
+          echo "AWS_REVIEW_ARGS=$AWS_REVIEW_ARGS" >> $GITHUB_ENV
+
+      - name: Clone pr-agent-aws repo
+        run: |
+          git clone https://github.com/guanzhili/pr-agent-aws.git
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      - name: Install dependencies
+        run: |
+          cd pr-agent-aws
+          pip install -r requirements.txt
+
+      - name: Run Python script
+        run: |
+          cd pr-agent-aws
+          python -m pr_agent.cli --pr_url "$PR_URL" "$AWS_REVIEW_ARGS"
