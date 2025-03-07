@@ -38,6 +38,11 @@ jobs:
         run: |
           cd pr-agent
           pip install -r requirements.txt
+      
+      - name: Remove unwanted characters from pr_reviewer_prompts.toml
+        run: |
+          sed -i 's/(0-3 issues) of//g' ./pr_agent/settings/pr_reviewer_prompts.toml
+          cat ./pr_agent/settings/pr_reviewer_prompts.toml # To verify that the changes are applied
 
       - name: Run Python script
         env:
