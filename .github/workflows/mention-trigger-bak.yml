@@ -27,7 +27,7 @@ jobs:
 
       - name: Clone pr-agent-aws repo
         run: |
-          git clone https://github.com/qodo-ai/pr-agent.git
+          git clone https://github.com/guanzhili/pr-agent-aws.git
 
       - name: Set up Python
         uses: actions/setup-python@v4
@@ -36,18 +36,18 @@ jobs:
 
       - name: Install dependencies
         run: |
-          cd pr-agent
+          cd pr-agent-aws
           pip install -r requirements.txt
 
       - name: Run Python script
         env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.PR_AGENT_AWS__AWS_ACCESS_KEY_ID }}
-          AWS_REGION_NAME: ${{ secrets.PR_AGENT_AWS__AWS_REGION_NAME }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.PR_AGENT_AWS__AWS_SECRET_ACCESS_KEY }}
-          GITHUB.USER_TOKEN: ${{ secrets.PR_AGENT_GITHUB__USER_TOKEN }}
-          config.model: ${{ secrets.PR_AGENT_CONFIG__MODEL }}
+          PR_AGENT_AWS__AWS_ACCESS_KEY_ID: ${{ secrets.PR_AGENT_AWS__AWS_ACCESS_KEY_ID }}
+          PR_AGENT_AWS__AWS_REGION_NAME: ${{ secrets.PR_AGENT_AWS__AWS_REGION_NAME }}
+          PR_AGENT_AWS__AWS_SECRET_ACCESS_KEY: ${{ secrets.PR_AGENT_AWS__AWS_SECRET_ACCESS_KEY }}
+          PR_AGENT_GITHUB__USER_TOKEN: ${{ secrets.PR_AGENT_GITHUB__USER_TOKEN }}
+          PR_AGENT_CONFIG__MODEL: ${{ secrets.PR_AGENT_CONFIG__MODEL }}
         run: |
-          cd pr-agent
+          cd pr-agent-aws
           echo "PR_URL is $PR_URL"
           echo "GITHUB_ENV is $GITHUB_ENV"
           echo "Running command: python -m pr_agent.cli --pr_url \"$PR_URL\" \"$AWS_REVIEW_ARGS\""
