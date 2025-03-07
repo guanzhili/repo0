@@ -42,7 +42,7 @@ jobs:
       - name: Remove unwanted characters from pr_reviewer_prompts.toml
         run: |
           sed -i 's/(0-3 issues) of//g' ./pr-agent/pr_agent/settings/pr_reviewer_prompts.toml
-          cat ./pr_agent/settings/pr_reviewer_prompts.toml # To verify that the changes are applied
+          cat ./pr-agent/pr_agent/settings/pr_reviewer_prompts.toml # To verify that the changes are applied
 
       - name: Run Python script
         env:
