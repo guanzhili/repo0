@@ -25,7 +25,7 @@ jobs:
           echo "AWS_REVIEW_ARGS=$AWS_REVIEW_ARGS" >> $GITHUB_ENV
 
 
-      - name: Clone pr-agent-aws repo
+      - name: Clone pr-agent repo
         run: |
           git clone https://github.com/qodo-ai/pr-agent.git
 
@@ -41,6 +41,7 @@ jobs:
       
       - name: Remove unwanted characters from pr_reviewer_prompts.toml
         run: |
+          ls
           sed -i 's/(0-3 issues) of//g' ./pr_agent/settings/pr_reviewer_prompts.toml
           cat ./pr_agent/settings/pr_reviewer_prompts.toml # To verify that the changes are applied
 
